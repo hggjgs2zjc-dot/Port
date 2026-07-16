@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chanti Times — A Personal Newspaper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #E9E6DA;
+    --paper-2: #E1DDCE;
+    --ink: #1C1B17;
+    --ink-soft: #4A473E;
+    --rule: #C9C3AF;
+    --seal: #8F2F24;
+    --ledger: #2E4A4F;
+    --focus: #2E4A4F;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px);
+    color: var(--ink);
+    font-family: 'Source Serif 4', serif;
+    line-height: 1.6;
+  }
+
+  a{ color: inherit; }
+
+  ::selection{ background: var(--seal); color: var(--paper); }
+
+  *:focus-visible{
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Masthead ---------- */
+
+  .masthead{
+    padding: 28px 0 18px;
+    border-bottom: 4px double var(--ink);
+  }
+
+  .masthead-top{
+    display:flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+
+  .nameplate{
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(42px, 8vw, 84px);
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+    margin: 0;
+  }
+
+  .tagline{
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    letter-spacing: 0.01em;
+  }
+
+  .tagline em{ font-style: italic; }
+
+  .rubric{
+    display:flex;
+    justify-content: center;
+    gap: 10px;
+    align-items:center;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 16px;
+  }
+  .rubric .dot{ width:4px; height:4px; border-radius:50%; background: var(--seal); }
+
+  /* ---------- Layout ---------- */
+
+  .layout{
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 56px;
+    padding: 40px 0 80px;
+    align-items: start;
+  }
+
+  @media (max-width: 860px){
+    .layout{ grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ---------- Lead story ---------- */
+
+  .lead{
+    padding-bottom: 34px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 34px;
+  }
+
+  .kicker{
+    display:inline-block;
+    font-family:'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ledger);
+    padding: 3px 10px;
+    margin-bottom: 14px;
+  }
+
+  .headline{
+    font-family:'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.08;
+    margin: 0 0 12px;
+  }
+
+  .byline{
+    font-family:'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+    margin-bottom: 18px;
+  }
+
+  .byline .sep{ margin: 0 6px; opacity: 0.5; }
+
+  .dropcap::first-letter{
+    font-family:'Fraunces', serif;
+    font-weight: 900;
+    font-size: 3.6em;
+    float:left;
+    line-height: 0.8;
+    padding-right: 10px;
+    padding-top: 4px;
+    color: var(--seal);
+  }
+
+  .lead p{ margin: 0 0 14px; font-size: 17px; }
+
+  /* ---------- Entry list ---------- */
+
+  .entry{
+    padding: 26px 0;
+    border-bottom: 1px solid var(--rule);
+    display:grid;
+    grid-template-columns: 76px 1fr;
+    gap: 20px;
+  }
+  .entry:last-child{ border-bottom: none; }
+
+  .entry-date{
+    font-family:'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-align:right;
+    padding-top: 4px;
+    line-height: 1.4;
+  }
+  .entry-date .day{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .entry h3{
+    font-family:'Fraunces', serif;
+    font-weight: 600;
+    font-size: 21px;
+    margin: 0 0 8px;
+    line-height: 1.2;
+  }
+
+  .entry .tag{
+    font-family:'Inter', sans-serif;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ledger);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display:block;
+  }
+
+  .entry p{
+    margin: 0;
+    font-size: 15.5px;
+    color: var(--ink);
+  }
+
+  .entry .read-more{
+    display:inline-block;
+    margin-top: 8px;
+    font-family:'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  /* ---------- Marginalia rail (signature element) ---------- */
+
+  .marginalia{
+    position: relative;
+    padding-left: 22px;
+    border-left: 1px solid var(--rule);
+  }
+
+  .marginalia-label{
+    font-family:'Inter', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+
+  .note{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+    margin-bottom: 26px;
+    position: relative;
+    padding-right: 4px;
+  }
+  .note::before{
+    content: "";
+    position: absolute;
+    left: -22px;
+    top: 4px;
+    width: 12px;
+    height: 1px;
+    background: var(--seal);
+  }
+  .note .stamp{
+    display:block;
+    font-family:'Inter', sans-serif;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--seal);
+    margin-top: 6px;
+  }
+
+  .archive-box{
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--rule);
+  }
+  .archive-box h4{
+    font-family:'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+  }
+  .archive-box ul{ list-style:none; margin:0; padding:0; }
+  .archive-box li{
+    font-family:'Inter', sans-serif;
+    font-size: 13px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .archive-box li:last-child{ border-bottom:none; }
+  .archive-box a{ text-decoration:none; }
+  .archive-box a:hover{ color: var(--seal); }
+
+  /* ---------- Footer ---------- */
+
+  footer{
+    border-top: 4px double var(--ink);
+    padding: 24px 0 40px;
+    text-align:center;
+    font-family:'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="masthead-top">
+      <span id="today-date">—</span>
+      <span>Edition No. <span id="edition-no">1</span></span>
+      <span>Single Reader Circulation</span>
+    </div>
+    <h1 class="nameplate">Chanti Times</h1>
+    <p class="tagline">Notes, ledgers &amp; reflections — <em>published irregularly, read carefully</em></p>
+    <div class="rubric">
+      <span>Dispatches</span><span class="dot"></span>
+      <span>Ledger</span><span class="dot"></span>
+      <span>Reflections</span><span class="dot"></span>
+      <span>Marginalia</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="layout">
+
+    <!-- Main column -->
+    <main>
+      <article class="lead">
+        <span class="kicker">Lead Dispatch</span>
+        <h2 class="headline">On starting the paper</h2>
+        <div class="byline">By You <span class="sep">/</span> Editor &amp; Sole Contributor <span class="sep">/</span> Front Page</div>
+        <p class="dropcap">This is the first entry of your own newspaper — a place to file the week's real thoughts before they scatter. Replace this paragraph with whatever is actually on your mind today: a decision you're weighing, something you read, a plan taking shape.</p>
+        <p>Keep entries short enough to write in one sitting. The point isn't polish — it's a habit of noticing, dated and kept.</p>
+        <a class="read-more" href="#">Continue reading →</a>
+      </article>
+
+      <section aria-label="Recent entries">
+        <div class="entry">
+          <div class="entry-date"><span class="day">12</span>JUL</div>
+          <div>
+            <span class="tag">Ledger</span>
+            <h3>A note on the week's numbers</h3>
+            <p>Short reflection on a business or money decision — what you tried, what it cost, what you'd do differently.</p>
+            <a class="read-more" href="#">Continue reading →</a>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-date"><span class="day">08</span>JUL</div>
+          <div>
+            <span class="tag">Reflections</span>
+            <h3>Something worth sitting with</h3>
+            <p>A passage, idea, or conversation that stayed with you longer than expected, and why.</p>
+            <a class="read-more" href="#">Continue reading →</a>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-date"><span class="day">03</span>JUL</div>
+          <div>
+            <span class="tag">Dispatches</span>
+            <h3>Field notes from an ordinary day</h3>
+            <p>The small, undocumented stuff — a walk, a call home, a thing that made you laugh.</p>
+            <a class="read-more" href="#">Continue reading →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Marginalia rail -->
+    <aside class="marginalia">
+      <div class="marginalia-label">Marginalia</div>
+
+      <div class="note">
+        "Write it down before it becomes a memory instead of a fact."
+        <span class="stamp">Note to self</span>
+      </div>
+
+      <div class="note">
+        A running line for half-formed ideas that don't deserve a full entry yet.
+        <span class="stamp">Filed, unfinished</span>
+      </div>
+
+      <div class="archive-box">
+        <h4>Back Issues</h4>
+        <ul>
+          <li><a href="#">Edition No. 0 — June archive</a></li>
+          <li><a href="#">On slowing down</a></li>
+          <li><a href="#">Karimnagar, revisited</a></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  Chanti Times — Est. 2026 — Printed for an audience of one
+</footer>
+
+<script>
+  // Auto-fill today's date and a simple edition counter based on week number.
+  (function(){
+    const dateEl = document.getElementById('today-date');
+    const editionEl = document.getElementById('edition-no');
+    const now = new Date();
+
+    dateEl.textContent = now.toLocaleDateString('en-US', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    // Edition number: weeks since an arbitrary launch date (Jan 1, 2026).
+    const launch = new Date('2026-01-01T00:00:00');
+    const msPerWeek = 7 * 24 * 60 * 60 * 1000;
+    const edition = Math.max(1, Math.floor((now - launch) / msPerWeek) + 1);
+    editionEl.textContent = edition;
+  })();
+</script>
+
+</body>
+</html>
